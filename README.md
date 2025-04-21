@@ -1,2 +1,7 @@
 # practice_test_generator
 A simple application that is intended to run through generated practice questions for certification exams. The questions were not created by the owners of the certification exams, nor did they contribute to the making of this. It may or may not be accurate.
+
+The below is the format that the tests need to be in.
+| Question | Option A | Option B | Option C | Option D | Correct Answer | Explanation |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
+| What is the best animal? | Cats | Dogs | Birds | All of them | All of them | Because they are all amazing! |
