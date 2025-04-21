@@ -23,16 +23,6 @@ def load_test(filepath):
         print(f"Error reading {filepath}: {e}")
     return questions
 
-def strip_answer(answer):
-    """
-    Formats the answer so that it can be properly read.
-    
-    """
-    correct_answer_list = answer.split("-")
-    correct_answer_formatted = correct_answer_list[0].strip()
-
-    return correct_answer_formatted
-
 
 def run_test(test_data):
     """
@@ -54,7 +44,7 @@ def run_test(test_data):
         user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
         correct_answer = question[5].strip().upper()
 
-        if user_answer == strip_answer(correct_answer):
+        if options[user_answer].upper() == correct_answer:
             print("\nCorrect!")
             score += 1
         else:
