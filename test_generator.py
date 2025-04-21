@@ -1,5 +1,6 @@
 import csv
 import os
+import re
 
 def list_csv_files(directory="."):
     """
@@ -15,10 +16,22 @@ def load_test(filepath):
     questions = []
     try:
         with open(filepath, newline='', encoding='utf-8') as csvfile:
-            reader = csv.reader(csvfile)
+            reader = csv.reader(csvfile, escapechar='\\')
             next(reader)
             for row in reader:
-                questions.append(row)
+
+                cleaned_row = []
+
+                for item in row:
+                    new_item = re.sub('"', '', item)
+                    cleaned_row.append(new_item)
+
+                questions.append(cleaned_row)
+
+            # for value in questions:
+            #     for cell in value:
+            #         cell = re.sub('"', '', cell)
+
     except Exception as e:
         print(f"Error reading {filepath}: {e}")
     return questions
@@ -40,11 +53,18 @@ def run_test(test_data):
         }
         for key, text in options.items():
             print(f"  {key}. {text}")
-        
+
         user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
+
+        while user_answer not in list(options.keys()):
+            print(f'You have selected an invalid option.\nPlease select a valid option.')
+            user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
+
         correct_answer = question[5].strip().upper()
 
-        if options[user_answer].upper() == correct_answer:
+        print(options[user_answer].strip().upper())
+
+        if options[user_answer].strip().upper() == correct_answer:
             print("\nCorrect!")
             score += 1
         else:
