@@ -1,6 +1,7 @@
 import csv
 import os
 import re
+import random
 
 def list_csv_files(directory="."):
     """
@@ -28,10 +29,6 @@ def load_test(filepath):
 
                 questions.append(cleaned_row)
 
-            # for value in questions:
-            #     for cell in value:
-            #         cell = re.sub('"', '', cell)
-
     except Exception as e:
         print(f"Error reading {filepath}: {e}")
     return questions
@@ -41,34 +38,51 @@ def run_test(test_data):
     """
     Iterates over the test questions, displays them, and checks the user's answers.
     """
+    random.shuffle(test_data)
     score = 0
     for i, question in enumerate(test_data, start=1):
         print(f"\nQuestion {i}: {question[0]}\n")
-        # Display each multiple-choice option
-        options = {
-            'A': question[1],
-            'B': question[2],
-            'C': question[3],
-            'D': question[4]
-        }
-        for key, text in options.items():
-            print(f"  {key}. {text}")
+        
+        # List of possible answers
+        options_list = [
+            question[1],
+            question[2],
+            question[3],
+            question[4]
+        ]
+
+        # Shuffle the list
+        random.shuffle(options_list)
+
+        # Reassign letters for presenting shuffled letters
+        presented_options = {}
+        letter_list = ['A', 'B', 'C', 'D']
+
+        for new_letter, text in zip(letter_list, options_list):
+            presented_options[new_letter] = text
+
+
+        correct_original = question[5].strip().upper()
+
+        #Display the shuffled answer options
+        for letter in letter_list:
+            print(f"  {letter}. {presented_options[letter]}")
+
+
+
+        # Retrieve input from the user and validate input
 
         user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
 
-        while user_answer not in list(options.keys()):
+        while user_answer not in letter_list:
             print(f'You have selected an invalid option.\nPlease select a valid option.')
             user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
 
-        correct_answer = question[5].strip().upper()
-
-        print(options[user_answer].strip().upper())
-
-        if options[user_answer].strip().upper() == correct_answer:
+        if presented_options[user_answer].strip().upper() == correct_original:
             print("\nCorrect!")
             score += 1
         else:
-            print(f"\nIncorrect. The correct answer is {correct_answer}.")
+            print(f"\nIncorrect. The correct answer was {correct_original}.")
         
         print("Explanation:", question[6])
         print("-" * 50)
