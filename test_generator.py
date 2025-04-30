@@ -93,9 +93,30 @@ def main():
     print("Welcome to the CSV Test Generator!\n")
 
     tests_folder = os.path.join(".", "tests")
+    test_category_list = os.listdir(tests_folder)
     
+    print("Select a category from the following folders:\n")
+    for idx, folder_name in enumerate(test_category_list, start=1):
+        print(f"{idx}. {folder_name}")
+
+    try:
+        category_selection = int(input("\nEnter the number of the category you'd like to take: ").strip())
+        if category_selection < 1 or category_selection > len(test_category_list):
+            print("Invalid selection. Please try again.")
+            return
+    except ValueError:
+        print("Please enter a valid number.")
+        return 
+
+    selected_category = test_category_list[category_selection -1]
+    print(f"\nYou selected: {selected_category}\n")    
+    
+    
+    
+    tests_csvs = os.path.join(tests_folder, selected_category)
+
     # List all CSV files in the test directory
-    files = list_csv_files(tests_folder)
+    files = list_csv_files(tests_csvs)
     if not files:
         print("No CSV test files found in the test directory.")
         return
@@ -117,7 +138,7 @@ def main():
     print(f"\nYou selected: {selected_file}\n")
     
     # Load the test from the selected CSV file
-    test_data = load_test(os.path.join(tests_folder, selected_file))
+    test_data = load_test(os.path.join(tests_csvs, selected_file))
     if test_data:
         run_test(test_data)
     else:
