@@ -92,7 +92,7 @@ def run_test(test_data):
 def main():
     print("Welcome to the CSV Test Generator!\n")
 
-    tests_folder = os.path.join(".", "tests")
+    tests_folder = os.path.join(".", "practice_tests")
     test_category_list = os.listdir(tests_folder)
     
     print("Select a category from the following folders:\n")
