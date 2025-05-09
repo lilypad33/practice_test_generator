@@ -2,12 +2,41 @@ import csv
 import os
 import re
 import random
+import sys
 
 def list_csv_files(directory="."):
     """
     Lists all CSV files in the given directory.
     """
     return [f for f in os.listdir(directory) if f.endswith('.csv')]
+
+def select_option(selection_list):
+    '''
+    Lists the categories/selection items and requests the user select a valid option.
+    
+    '''
+    isValid = True
+
+    category_selection = input("\nEnter the number of the category you'd like to take: ").strip()
+    if category_selection.upper() == "X":
+        print("Exiting the application...")
+        sys.exit()
+    elif int(category_selection) < 1 or int(category_selection) > len(selection_list):
+        isValid = False
+        print("Invalid selection. Please try again.")
+        while not isValid:
+            category_selection = int(input("\nEnter the number of the category you'd like to take: ").strip())
+            if category_selection > 1 or category_selection < len(selection_list):
+                isValid = True
+
+    return int(category_selection)
+
+def print_directory_file_options(directory_files_list):
+    for idx, folder_name in enumerate(directory_files_list, start=1):
+        print(f"{idx}. {folder_name}")
+
+    # Exit button
+    print("Exit: X")
 
 def load_test(filepath):
     """
@@ -96,17 +125,9 @@ def main():
     test_category_list = os.listdir(tests_folder)
     
     print("Select a category from the following folders:\n")
-    for idx, folder_name in enumerate(test_category_list, start=1):
-        print(f"{idx}. {folder_name}")
+    print_directory_file_options(test_category_list)
 
-    try:
-        category_selection = int(input("\nEnter the number of the category you'd like to take: ").strip())
-        if category_selection < 1 or category_selection > len(test_category_list):
-            print("Invalid selection. Please try again.")
-            return
-    except ValueError:
-        print("Please enter a valid number.")
-        return 
+    category_selection = select_option(test_category_list)
 
     selected_category = test_category_list[category_selection -1]
     print(f"\nYou selected: {selected_category}\n")    
@@ -122,19 +143,11 @@ def main():
         return
     
     print("Select a test from the following files:\n")
-    for idx, filename in enumerate(files, start=1):
-        print(f"{idx}. {filename}")
+    print_directory_file_options(files)
     
-    try:
-        selection = int(input("\nEnter the number of the test you'd like to take: ").strip())
-        if selection < 1 or selection > len(files):
-            print("Invalid selection. Please try again.")
-            return
-    except ValueError:
-        print("Please enter a valid number.")
-        return
-    
-    selected_file = files[selection - 1]
+    test_selection = select_option(files)
+
+    selected_file = files[test_selection - 1]
     print(f"\nYou selected: {selected_file}\n")
     
     # Load the test from the selected CSV file
