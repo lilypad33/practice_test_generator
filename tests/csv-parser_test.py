@@ -27,5 +27,5 @@ def test_load_test_nested_csvs(csv_file):
         assert isinstance(row, list), f"Row {row} is not a list."
 
     for row in result:
-        assert len(result[row]) == 7, f"Row {row} does not have 7 columns"
+        assert len(row) == 7, f"Row {row} does not have 7 columns"
 
