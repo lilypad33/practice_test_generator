@@ -100,24 +100,30 @@ def run_test(test_data):
         for letter in letter_list:
             print(f"  {letter}. {presented_options[letter]}")
 
-
+        print("Exit: X")
 
         # Retrieve input from the user and validate input
 
         user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
 
-        while user_answer not in letter_list:
-            print(f'You have selected an invalid option.\nPlease select a valid option.')
-            user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
-
-        if presented_options[user_answer].strip().upper() == correct_original:
-            print("\nCorrect!")
-            score += 1
+        if user_answer.upper() == "X":
+            print("Safely exiting the test and compiling your score...")
+            print(f"Your score: {score}/{i}")
+            print("-" * 50)
+            sys.exit()
         else:
-            print(f"\nIncorrect. The correct answer was {correct_original}.")
-        
-        print("Explanation:", question[6])
-        print("-" * 50)
+            while user_answer not in letter_list:
+                print(f'You have selected an invalid option.\nPlease select a valid option.')
+                user_answer = input("\nYour answer (A, B, C, D): ").strip().upper()
+
+            if presented_options[user_answer].strip().upper() == correct_original:
+                print("\nCorrect!")
+                score += 1
+            else:
+                print(f"\nIncorrect. The correct answer was {correct_original}.")
+            
+            print("Explanation:", question[6])
+            print("-" * 50)
 
     print(f"\nTest completed! Your score: {score}/{len(test_data)}\n")
 
