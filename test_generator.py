@@ -32,6 +32,9 @@ def select_option(selection_list):
     return int(category_selection)
 
 def print_directory_file_options(directory_files_list):
+    '''
+    Prints the options for directories or tests and includes an exit button.
+    '''
     for idx, folder_name in enumerate(directory_files_list, start=1):
         print(f"{idx}. {folder_name}")
 
