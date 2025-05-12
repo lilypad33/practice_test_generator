@@ -1,6 +1,16 @@
 # practice_test_generator
 A simple application that is intended to run through generated practice questions for certification exams. The questions were not created by the owners of the certification exams, nor did they contribute to the making of this. It may or may not be accurate.
 
+The requirements.txt file is only required if you wish to validate the practice test csv files. To install the requirements, run the below command:
+```
+    py -m pip install -r requirements.txt
+```
+## Table of Contents
+- [practice\_test\_generator](#practice_test_generator)
+  - [Table of Contents](#table-of-contents)
+  - [To add a new test do one of the following:](#to-add-a-new-test-do-one-of-the-following)
+  - [To ensure the practice tests have the correct formatting:](#to-ensure-the-practice-tests-have-the-correct-formatting)
+
 ## To add a new test do one of the following:
 - Add it to the appropriate category folder in the tests/ folder 
 - Make a new test category folder and place it in there.
