@@ -10,9 +10,26 @@ The requirements.txt file is only required if you wish to validate the practice 
 ## Table of Contents
 - [practice\_test\_generator](#practice_test_generator)
   - [Table of Contents](#table-of-contents)
+  - [To run the program (requires the terminal)](#to-run-the-program-requires-the-terminal)
   - [To add a new test, do one of the following:](#to-add-a-new-test-do-one-of-the-following)
   - [To ensure the practice tests have the correct formatting:](#to-ensure-the-practice-tests-have-the-correct-formatting)
 
+## To run the program (requires the terminal)
+1. Open the terminal.
+2. Change directory to the root directory, or open the root directory in VS Code or other code editor.
+3. If using a code editor:
+   1. Click on test_generator.py
+   2. Click Run
+   3. Click Run without Debugging
+4. If using the terminal
+   1. Run one of the two commands. Either should work.
+
+```
+py -m test_generator
+```
+```
+python test_generator.py
+```
 ## To add a new test, do one of the following:
 - Add it to the appropriate category folder in the tests/ folder 
 - Make a new test category folder and place it in there.
