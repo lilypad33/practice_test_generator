@@ -108,7 +108,7 @@ def run_test(test_data):
 
         if user_answer.upper() == "X":
             print("Safely exiting the test and compiling your score...")
-            print(f"Your score: {score}/{i}")
+            print(f"Your score: {score}/{i - 1}")
             print("-" * 50)
             sys.exit()
         else:
