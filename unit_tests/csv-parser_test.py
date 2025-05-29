@@ -1,6 +1,6 @@
 import os
 import pytest
-from test_generator import load_test  # Adjust the import path to your project structure.
+from test_generator import load_test
 
 def find_all_csvs_in_subdirectories(base_directory):
     """
